@@ -9,7 +9,7 @@ public class Tree {
 	
 
 	public Tree(int heightH, int thicknessD, int weightC, int valueP) {
-		super(); // zapomniałem już co oznaczał ten super 
+		super(); // zapomniałem już co oznaczał ten super:)
 		this.heightH = heightH;
 		this.thicknessD = thicknessD;
 		this.unitWeightC = weightC;
