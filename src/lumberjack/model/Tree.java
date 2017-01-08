@@ -5,11 +5,13 @@ public class Tree {
 	int thicknessD;
 	int unitWeightC;
 	int unitValueP;
+	int x;
+	int y;
 	
 	
 
 	public Tree(int heightH, int thicknessD, int weightC, int valueP) {
-		super(); // zapomniałem już co oznaczał ten super
+		super();
 		this.heightH = heightH;
 		this.thicknessD = thicknessD;
 		this.unitWeightC = weightC;
@@ -63,6 +65,22 @@ public class Tree {
 	
 	public int getTimeNeededToCut() {
 		return thicknessD;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 	
 }
