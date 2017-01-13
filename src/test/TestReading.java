@@ -21,7 +21,7 @@ public class TestReading {
 		
 		InputReader ir = new InputReader();
 		Problem p = ir.ReadProblemFromInput(input);
-		
+		p.countProfitability();
 		System.out.println(p);
 		
 		//add asserts
