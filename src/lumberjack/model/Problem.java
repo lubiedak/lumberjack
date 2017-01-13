@@ -6,6 +6,8 @@ public class Problem {
 
 	int[][] net;
 	int[][] profitabilityNet;
+	int[][] distancesBetweenTrees;
+	
 	ArrayList<Tree> trees;
 	int startTime;
 
@@ -19,6 +21,10 @@ public class Problem {
 		}
 		this.startTime = startTime;
 		trees = new ArrayList<Tree>();
+		
+		// TODO:
+		//+ jeden param do konstruktora, bo distancesBetweenTrees ma rozmiar ilosc drzew x ilosc drzew
+		// a trzeba ta tablice taz zalokowac
 	}
 	
 	public void addTree(Tree tree){
@@ -31,6 +37,26 @@ public class Problem {
 			profitabilityNet[tree.getX()][tree.getY()] = tree.getTreeValue();
 		}
 	}
+	
+	
+	public void countDistances(){
+		//TODO
+		//Iterujesz po każdej parze drzew ( for w forze) i liczysz odległosć miedzy każda para drzew
+		// dystans = abs(x1-x2) + abs(y1-y2)
+	}
+	
+	public void countProfitabilityDividedByCutCost(){
+		//TODO
+		// z nazwy funkci wynika co trzeba zrobić, przyda sie dwuwymiarowa tablica floatow
+	}
+	
+	public void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree(){
+		//TODO
+		//tablica floatow - w ktora strone najlepiej sciac drzewo, zeby obaliło inne i tymczasem mamy 2 drzewa sciete, wiekszy profit
+		//Ciut trudniejsze ale dasz rade
+		
+	}
+	
 
 	@Override
 	public String toString() {
