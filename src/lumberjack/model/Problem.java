@@ -7,6 +7,7 @@ public class Problem {
 	int[][] net;
 	int[][] profitabilityNet;
 	int[][] distancesBetweenTrees;
+	float[][] profitabilityNetByCutCost;
 	
 	ArrayList<Tree> trees;
 	int startTime;
@@ -28,6 +29,7 @@ public class Problem {
 	public void analyze(){
 		countDistances();
 		countProfitability();
+		countProfitabilityDividedByCutCost();
 	}
 	
 	public void countProfitability(){
@@ -47,8 +49,9 @@ public class Problem {
 	}
 	
 	public void countProfitabilityDividedByCutCost(){
-		//TODO
-		// z nazwy funkci wynika co trzeba zrobić, przyda sie dwuwymiarowa tablica floatow
+		for(Tree tree : trees){
+			profitabilityNetByCutCost[tree.getX()][tree.getY()] = (tree.getTreeValue() + 0.0f) / tree.getTimeNeededToCut();
+		}
 	}
 	
 	public void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree(){
@@ -72,6 +75,9 @@ public class Problem {
 		info += "\nDistances:\n";
 		info += printMatrix(distancesBetweenTrees);
 		
+		info += "\nProfitabilityNetByCutCost:\n";
+		info += printMatrixFloat(profitabilityNetByCutCost);
+		
 		info += "\nTrees:\n";
 		for (Tree tree : trees) {
 			info += "\n" + tree;
@@ -92,12 +98,26 @@ public class Problem {
 		return info;
 	}
 	
+	private String printMatrixFloat(float[][] matrix){
+		String info = "";
+		for (int i = 0; i < matrix.length; ++i) {
+
+			for (int j = 0; j < matrix[i].length; ++j) {
+				info += matrix[i][j] + "\t";
+			}
+			info += "\n";
+		}
+		return info;
+	}
+	
 	private void initNets(int netSize){
 		net = new int[netSize][];
 		profitabilityNet = new int[netSize][];
+		profitabilityNetByCutCost = new float[netSize][];
 		for (int i = 0; i < netSize; ++i) {
 			net[i] = new int[netSize];
 			profitabilityNet[i] = new int[netSize];
+			profitabilityNetByCutCost[i] = new float[netSize];
 		}
 	}
 	
