@@ -11,20 +11,13 @@ public class Problem {
 	ArrayList<Tree> trees;
 	int startTime;
 
-	public Problem(int netSize, int startTime) {
+	public Problem(int startTime, int netSize, int nOfTrees) {
 		super();
-		net = new int[netSize][];
-		profitabilityNet = new int[netSize][];
-		for (int i = 0; i < netSize; ++i) {
-			net[i] = new int[netSize];
-			profitabilityNet[i] = new int[netSize];
-		}
+		initNets(netSize);
+		
 		this.startTime = startTime;
 		trees = new ArrayList<Tree>();
-		
-		// TODO:
-		//+ jeden param do konstruktora, bo distancesBetweenTrees ma rozmiar ilosc drzew x ilosc drzew
-		// a trzeba ta tablice taz zalokowac
+		initGraphs(nOfTrees);
 	}
 	
 	public void addTree(Tree tree){
@@ -63,10 +56,13 @@ public class Problem {
 		String info = "startTime=" + startTime;
 		info += "\nnetSize=" + net.length;
 		info += "\nNet:\n";
-		info += printTrees(net);
+		info += printMatrix(net);
 
 		info += "\nProfitability Net:\n";
-		info += printTrees(profitabilityNet);
+		info += printMatrix(profitabilityNet);
+		
+		info += "\nDistances:\n";
+		info += printMatrix(distancesBetweenTrees);
 		
 		info += "\nTrees:\n";
 		for (Tree tree : trees) {
@@ -76,16 +72,32 @@ public class Problem {
 		return info;
 	}
 	
-	private String printTrees(int[][] netOfTrees){
+	private String printMatrix(int[][] matrix){
 		String info = "";
-		for (int i = 0; i < netOfTrees.length; ++i) {
+		for (int i = 0; i < matrix.length; ++i) {
 
-			for (int j = 0; j < netOfTrees[i].length; ++j) {
-				info += netOfTrees[i][j] + "\t";
+			for (int j = 0; j < matrix[i].length; ++j) {
+				info += matrix[i][j] + "\t";
 			}
 			info += "\n";
 		}
 		return info;
+	}
+	
+	private void initNets(int netSize){
+		net = new int[netSize][];
+		profitabilityNet = new int[netSize][];
+		for (int i = 0; i < netSize; ++i) {
+			net[i] = new int[netSize];
+			profitabilityNet[i] = new int[netSize];
+		}
+	}
+	
+	private void initGraphs(int nOfTrees){
+		distancesBetweenTrees = new int[nOfTrees][];
+		for (int i = 0; i < nOfTrees; ++i) {
+			distancesBetweenTrees[i] = new int[nOfTrees];
+		}
 	}
 
 }
