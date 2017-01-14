@@ -85,5 +85,5 @@ public class LumberJack {
 		timeToWalk -= tree.getTimeNeededToCut();
 	}
 	
-	private
+	
 }

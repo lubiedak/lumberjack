@@ -34,7 +34,7 @@ public class InputReader {
 			int weightC = Integer.parseInt(nextSplitted[4]);
 			int valueP = Integer.parseInt(nextSplitted[5]);
 			// tutaj do net trzeba wrzucic i-1 na pozycje x,y
-			Tree tree = new Tree(i, heightH, thicknessD, weightC, valueP, x, y);
+			Tree tree = new Tree(i-1, heightH, thicknessD, weightC, valueP, x, y);
 			problem.addTree(tree);
 		}
 		return problem;

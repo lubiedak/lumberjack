@@ -1,6 +1,7 @@
 package lumberjack.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Problem {
 
@@ -113,7 +114,8 @@ public class Problem {
 		for (int i = 0; i < matrix.length; ++i) {
 
 			for (int j = 0; j < matrix[i].length; ++j) {
-				info += matrix[i][j] + "\t";
+				
+				info += (matrix[i][j] >= 0 ? matrix[i][j] : ".") + "\t";
 			}
 			info += "\n";
 		}
@@ -126,7 +128,9 @@ public class Problem {
 		profitabilityNet = new int[netSize][];
 		profitabilityNetByCutCost = new int[netSize][];
 		for (int i = 0; i < netSize; ++i) {
+			
 			net[i] = new int[netSize];
+			Arrays.fill(net[i], -1);
 			profitabilityNet[i] = new int[netSize];
 			profitabilityNetByCutCost[i] = new int[netSize];
 		}
