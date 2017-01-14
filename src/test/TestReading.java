@@ -14,14 +14,14 @@ public class TestReading {
 	public void test() {
 		
 		List<String> input = new ArrayList<String>();
-		input.add("11 10 5");
+		input.add("11 7 2");
 		input.add("2 3 4 5 2 2");
 		input.add("2 6 3 1 1 3");
 		
 		
 		InputReader ir = new InputReader();
 		Problem p = ir.ReadProblemFromInput(input);
-		p.countProfitability();
+		p.analyze();
 		System.out.println(p);
 		
 		//add asserts

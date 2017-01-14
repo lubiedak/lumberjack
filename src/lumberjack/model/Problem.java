@@ -7,29 +7,29 @@ public class Problem {
 	int[][] net;
 	int[][] profitabilityNet;
 	int[][] distancesBetweenTrees;
+	float[][] profitabilityNetByCutCost;
 	
 	ArrayList<Tree> trees;
 	int startTime;
 
-	public Problem(int netSize, int startTime) {
+	public Problem(int startTime, int netSize, int nOfTrees) {
 		super();
-		net = new int[netSize][];
-		profitabilityNet = new int[netSize][];
-		for (int i = 0; i < netSize; ++i) {
-			net[i] = new int[netSize];
-			profitabilityNet[i] = new int[netSize];
-		}
+		initNets(netSize);
+		
 		this.startTime = startTime;
 		trees = new ArrayList<Tree>();
-		
-		// TODO:
-		//+ jeden param do konstruktora, bo distancesBetweenTrees ma rozmiar ilosc drzew x ilosc drzew
-		// a trzeba ta tablice taz zalokowac
+		initGraphs(nOfTrees);
 	}
 	
 	public void addTree(Tree tree){
 		trees.add(tree);
 		net[tree.getX()][tree.getY()] = tree.getId();
+	}
+	
+	public void analyze(){
+		countDistances();
+		countProfitability();
+		countProfitabilityDividedByCutCost();
 	}
 	
 	public void countProfitability(){
@@ -40,14 +40,18 @@ public class Problem {
 	
 	
 	public void countDistances(){
-		//TODO
-		//Iterujesz po każdej parze drzew ( for w forze) i liczysz odległosć miedzy każda para drzew
-		// dystans = abs(x1-x2) + abs(y1-y2)
+		for(int i = 0; i < trees.size(); ++i){
+			for(int j = 0; j < trees.size(); ++j){
+				distancesBetweenTrees[i][j] = Math.abs(trees.get(i).getX() - trees.get(j).getX())
+											+ Math.abs(trees.get(i).getY() - trees.get(j).getY()); 
+			}
+		}
 	}
 	
 	public void countProfitabilityDividedByCutCost(){
-		//TODO
-		// z nazwy funkci wynika co trzeba zrobić, przyda sie dwuwymiarowa tablica floatow
+		for(Tree tree : trees){
+			profitabilityNetByCutCost[tree.getX()][tree.getY()] = (tree.getTreeValue() + 0.0f) / tree.getTimeNeededToCut();
+		}
 	}
 	
 	public void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree(){
@@ -63,10 +67,16 @@ public class Problem {
 		String info = "startTime=" + startTime;
 		info += "\nnetSize=" + net.length;
 		info += "\nNet:\n";
-		info += printTrees(net);
+		info += printMatrix(net);
 
 		info += "\nProfitability Net:\n";
-		info += printTrees(profitabilityNet);
+		info += printMatrix(profitabilityNet);
+		
+		info += "\nDistances:\n";
+		info += printMatrix(distancesBetweenTrees);
+		
+		info += "\nProfitabilityNetByCutCost:\n";
+		info += printMatrixFloat(profitabilityNetByCutCost);
 		
 		info += "\nTrees:\n";
 		for (Tree tree : trees) {
@@ -76,16 +86,46 @@ public class Problem {
 		return info;
 	}
 	
-	private String printTrees(int[][] netOfTrees){
+	private String printMatrix(int[][] matrix){
 		String info = "";
-		for (int i = 0; i < netOfTrees.length; ++i) {
+		for (int i = 0; i < matrix.length; ++i) {
 
-			for (int j = 0; j < netOfTrees[i].length; ++j) {
-				info += netOfTrees[i][j] + "\t";
+			for (int j = 0; j < matrix[i].length; ++j) {
+				info += matrix[i][j] + "\t";
 			}
 			info += "\n";
 		}
 		return info;
+	}
+	
+	private String printMatrixFloat(float[][] matrix){
+		String info = "";
+		for (int i = 0; i < matrix.length; ++i) {
+
+			for (int j = 0; j < matrix[i].length; ++j) {
+				info += matrix[i][j] + "\t";
+			}
+			info += "\n";
+		}
+		return info;
+	}
+	
+	private void initNets(int netSize){
+		net = new int[netSize][];
+		profitabilityNet = new int[netSize][];
+		profitabilityNetByCutCost = new float[netSize][];
+		for (int i = 0; i < netSize; ++i) {
+			net[i] = new int[netSize];
+			profitabilityNet[i] = new int[netSize];
+			profitabilityNetByCutCost[i] = new float[netSize];
+		}
+	}
+	
+	private void initGraphs(int nOfTrees){
+		distancesBetweenTrees = new int[nOfTrees][];
+		for (int i = 0; i < nOfTrees; ++i) {
+			distancesBetweenTrees[i] = new int[nOfTrees];
+		}
 	}
 
 }
