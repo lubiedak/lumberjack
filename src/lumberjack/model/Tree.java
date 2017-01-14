@@ -30,7 +30,7 @@ public class Tree {
 	@Override
 	public String toString() {
 		return "Tree [id=" + id + ", heightH=" + heightH + ", thicknessD=" + thicknessD + ", unitWeightC=" + unitWeightC
-				+ ", unitValueP=" + unitValueP + ", x=" + x + ", y=" + y + "cut=" + cut + "]";
+				+ ", unitValueP=" + unitValueP + ", x=" + x + ", y=" + y + ", cut=" + cut + "]";
 	}
 
 	public int getId() {
