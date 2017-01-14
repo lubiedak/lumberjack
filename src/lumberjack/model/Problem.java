@@ -25,6 +25,11 @@ public class Problem {
 		net[tree.getX()][tree.getY()] = tree.getId();
 	}
 	
+	public void analyze(){
+		countDistances();
+		countProfitability();
+	}
+	
 	public void countProfitability(){
 		for(Tree tree : trees){
 			profitabilityNet[tree.getX()][tree.getY()] = tree.getTreeValue();
@@ -33,9 +38,12 @@ public class Problem {
 	
 	
 	public void countDistances(){
-		//TODO
-		//Iterujesz po każdej parze drzew ( for w forze) i liczysz odległosć miedzy każda para drzew
-		// dystans = abs(x1-x2) + abs(y1-y2)
+		for(int i = 0; i < trees.size(); ++i){
+			for(int j = 0; j < trees.size(); ++j){
+				distancesBetweenTrees[i][j] = Math.abs(trees.get(i).getX() - trees.get(j).getX())
+											+ Math.abs(trees.get(i).getY() - trees.get(j).getY()); 
+			}
+		}
 	}
 	
 	public void countProfitabilityDividedByCutCost(){
