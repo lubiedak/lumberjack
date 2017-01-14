@@ -27,8 +27,8 @@ public class InputReader {
 			String nextLine = input.get(i);
 			String[] nextSplitted = nextLine.split("\\s+");
 
-			int y = Integer.parseInt(nextSplitted[0]);
-			int x = Integer.parseInt(nextSplitted[1]);
+			int x = Integer.parseInt(nextSplitted[0]);
+			int y = Integer.parseInt(nextSplitted[1]);
 			int heightH = Integer.parseInt(nextSplitted[2]);
 			int thicknessD = Integer.parseInt(nextSplitted[3]);
 			int weightC = Integer.parseInt(nextSplitted[4]);

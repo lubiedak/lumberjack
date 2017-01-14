@@ -7,23 +7,24 @@ public class Problem {
 	int[][] net;
 	int[][] profitabilityNet;
 	int[][] distancesBetweenTrees;
-	float[][] profitabilityNetByCutCost;
+	int[][] profitabilityNetByCutCost;
 	
 	ArrayList<Tree> trees;
-	int startTime;
+	
+	LumberJack lumberjack;
 
 	public Problem(int startTime, int netSize, int nOfTrees) {
 		super();
 		initNets(netSize);
 		
-		this.startTime = startTime;
 		trees = new ArrayList<Tree>();
 		initGraphs(nOfTrees);
+		lumberjack = new LumberJack(startTime);
 	}
 	
 	public void addTree(Tree tree){
 		trees.add(tree);
-		net[tree.getX()][tree.getY()] = tree.getId();
+		net[tree.getY()][tree.getX()] = tree.getId();
 	}
 	
 	public void analyze(){
@@ -32,9 +33,15 @@ public class Problem {
 		countProfitabilityDividedByCutCost();
 	}
 	
+	public void solve(){
+		lumberjack.goToTree(trees.get(0));
+		lumberjack.cutTree("Cut up");
+		lumberjack.moveRight();
+	}
+	
 	public void countProfitability(){
 		for(Tree tree : trees){
-			profitabilityNet[tree.getX()][tree.getY()] = tree.getTreeValue();
+			profitabilityNet[tree.getY()][tree.getX()] = tree.getTreeValue();
 		}
 	}
 	
@@ -50,7 +57,7 @@ public class Problem {
 	
 	public void countProfitabilityDividedByCutCost(){
 		for(Tree tree : trees){
-			profitabilityNetByCutCost[tree.getX()][tree.getY()] = (tree.getTreeValue() + 0.0f) / tree.getTimeNeededToCut();
+			profitabilityNetByCutCost[tree.getY()][tree.getX()] = (tree.getTreeValue()) / tree.getTimeNeededToCut();
 		}
 	}
 	
@@ -72,7 +79,7 @@ public class Problem {
 
 	@Override
 	public String toString() {
-		String info = "startTime=" + startTime;
+		String info = "Lumberjack=" + lumberjack;
 		info += "\nnetSize=" + net.length;
 		info += "\nNet:\n";
 		info += printMatrix(net);
@@ -84,7 +91,7 @@ public class Problem {
 		info += printMatrix(distancesBetweenTrees);
 		
 		info += "\nProfitabilityNetByCutCost:\n";
-		info += printMatrixFloat(profitabilityNetByCutCost);
+		info += printMatrix(profitabilityNetByCutCost);
 		
 		info += "\nTrees:\n";
 		for (Tree tree : trees) {
@@ -105,27 +112,16 @@ public class Problem {
 		}
 		return info;
 	}
-	
-	private String printMatrixFloat(float[][] matrix){
-		String info = "";
-		for (int i = 0; i < matrix.length; ++i) {
 
-			for (int j = 0; j < matrix[i].length; ++j) {
-				info += matrix[i][j] + "\t";
-			}
-			info += "\n";
-		}
-		return info;
-	}
 	
 	private void initNets(int netSize){
 		net = new int[netSize][];
 		profitabilityNet = new int[netSize][];
-		profitabilityNetByCutCost = new float[netSize][];
+		profitabilityNetByCutCost = new int[netSize][];
 		for (int i = 0; i < netSize; ++i) {
 			net[i] = new int[netSize];
 			profitabilityNet[i] = new int[netSize];
-			profitabilityNetByCutCost[i] = new float[netSize];
+			profitabilityNetByCutCost[i] = new int[netSize];
 		}
 	}
 	
