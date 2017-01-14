@@ -61,6 +61,14 @@ public class Problem {
 		
 	}
 	
+	public void countIfCanFallATree(){
+		for(int i = 0; i < trees.size(); ++i){
+			for(int j = 0; j < trees.size(); ++j){
+				//TODO: distancesBetweenTrees[i][j] = // if i is able to fall on j and cut it; 
+			}
+		}
+	}
+	
 
 	@Override
 	public String toString() {

@@ -40,17 +40,14 @@ public class Tree {
 	public int getHeightH() {
 		return heightH;
 	}
-
 	
 	public int getThicknessD() {
 		return thicknessD;
 	}
 
-
 	public int getUnitWeightC() {
 		return unitWeightC;
 	}
-
 
 	public int getUnitValueP() {
 		return unitValueP;
