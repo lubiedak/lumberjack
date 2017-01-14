@@ -42,21 +42,17 @@ public class LumberJack {
 	public void goToTree(Tree tree) {
 		while (x != tree.getX()) {
 			if (tree.getX() > x) {
-				decisions.add("Move right");
-				x++;
+				moveRight();
 			} else {
-				decisions.add("Move left");
-				x--;
+				moveLeft();
 			}
 		}
 
 		while (y != tree.getY()) {
 			if (tree.getY() > y) {
-				decisions.add("Move up");
-				y++;
+				moveUp();
 			} else {
-				decisions.add("Move down");
-				y--;
+				moveDown();
 			}
 		}
 	}
@@ -64,21 +60,25 @@ public class LumberJack {
 	public void moveUp() {
 		decisions.add("Move up");
 		y++;
+		timeToWalk--;
 	}
 
 	public void moveDown() {
 		decisions.add("Move down");
 		y--;
+		timeToWalk--;
 	}
 
 	public void moveRight() {
 		decisions.add("Move right");
 		x++;
+		timeToWalk--;
 	}
 
 	public void moveLeft() {
 		decisions.add("Move left");
 		x--;
+		timeToWalk--;
 	}
 
 	public void cutTree(String cutDirection) {
