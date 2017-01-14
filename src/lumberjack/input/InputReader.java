@@ -21,19 +21,19 @@ public class InputReader {
 		
 		int time = Integer.parseInt(splitted[0]);
 		int netSize = Integer.parseInt(splitted[1]);
+		int[][] net = new int[netSize][netSize];
 		problem = new Problem(netSize, time);
 		
 		for (int i = 1; i < input.size(); i++) {
 			 String nextLine = input.get(i);
 			 String[] nextSplitted = nextLine.split("\\s+");
-			 
 			 int x = Integer.parseInt(nextSplitted[0]);
 			 int y = Integer.parseInt(nextSplitted[1]);
 			 int heightH = Integer.parseInt(nextSplitted[2]);
 			 int thicknessD = Integer.parseInt(nextSplitted[3]);
 			 int weightC = Integer.parseInt(nextSplitted[4]);
 			 int valueP = Integer.parseInt(nextSplitted[5]);
-			 // tutaj do net trzeba wrzucic i-1 na pozycje x,y
+			 net[x][y] = i;
 			 Tree tree = new Tree(i, heightH, thicknessD, weightC, valueP, x, y);
 			 problem.addTree(tree);
 		}
