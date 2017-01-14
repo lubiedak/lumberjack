@@ -35,7 +35,7 @@ public class Problem {
 	
 	public void solve(){
 		lumberjack.goToTree(trees.get(0));
-		lumberjack.cutTree("Cut up");
+		lumberjack.cutTree("Cut up", trees.get(0));
 		lumberjack.moveRight();
 	}
 	

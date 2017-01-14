@@ -1,7 +1,6 @@
 package lumberjack.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class LumberJack {
 
@@ -81,7 +80,10 @@ public class LumberJack {
 		timeToWalk--;
 	}
 
-	public void cutTree(String cutDirection) {
+	public void cutTree(String cutDirection, Tree tree) {
 		decisions.add(cutDirection);
+		timeToWalk -= tree.getTimeNeededToCut();
 	}
+	
+	private
 }
