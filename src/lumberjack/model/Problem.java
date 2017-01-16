@@ -80,7 +80,7 @@ public class Problem {
 			}
 		}
 		for (Tree t : trees){
-			
+			//kiedy bedziesz pisal?
 		}
 	}
 	
