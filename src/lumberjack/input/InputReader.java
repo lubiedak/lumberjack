@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Scanner;
 
 import lumberjack.model.Problem;
 import lumberjack.model.Tree;
@@ -16,27 +17,29 @@ public class InputReader {
 	public Problem ReadProblemFromInput(List<String> input) {
 
 		String firstLine = input.get(0);
-		String[] splitted = firstLine.split("\\s+");
-
-		int time = Integer.parseInt(splitted[0]);
-		int netSize = Integer.parseInt(splitted[1]);
-		int nOfTrees = Integer.parseInt(splitted[2]);
+		Scanner scanner = new Scanner(firstLine);
+		int time = scanner.nextInt();
+		int netSize = scanner.nextInt();
+		int nOfTrees = scanner.nextInt();
 		problem = new Problem(time, netSize, nOfTrees);
+		
+		
 
 		for (int i = 1; i < input.size(); i++) {
 			String nextLine = input.get(i);
-			String[] nextSplitted = nextLine.split("\\s+");
+			scanner = new Scanner(nextLine);
 
-			int x = Integer.parseInt(nextSplitted[0]);
-			int y = Integer.parseInt(nextSplitted[1]);
-			int heightH = Integer.parseInt(nextSplitted[2]);
-			int thicknessD = Integer.parseInt(nextSplitted[3]);
-			int weightC = Integer.parseInt(nextSplitted[4]);
-			int valueP = Integer.parseInt(nextSplitted[5]);
-			// tutaj do net trzeba wrzucic i-1 na pozycje x,y
+			int x = scanner.nextInt();
+			int y = scanner.nextInt();
+			int heightH = scanner.nextInt();
+			int thicknessD = scanner.nextInt();
+			int weightC = scanner.nextInt();
+			int valueP = scanner.nextInt();
+
 			Tree tree = new Tree(i-1, heightH, thicknessD, weightC, valueP, x, y);
 			problem.addTree(tree);
 		}
+		scanner.close();
 		return problem;
 	}
 
