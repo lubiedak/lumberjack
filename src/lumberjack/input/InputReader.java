@@ -1,9 +1,9 @@
 package lumberjack.input;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,20 +14,39 @@ public class InputReader {
 
 	Problem problem;
 
-	public Problem ReadProblemFromInput(List<String> input) {
+	
+	public Problem ReadProblemFromString(String input){
+		InputStream stream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+		return ReadProblemFromInputStream(stream);
+	}
 
-		String firstLine = input.get(0);
-		Scanner scanner = new Scanner(firstLine);
-		int time = scanner.nextInt();
-		int netSize = scanner.nextInt();
-		int nOfTrees = scanner.nextInt();
+	public Problem ReadProblemFromInputStream(InputStream stream) {
+		Scanner s = new Scanner(stream);
+		int time = s.nextInt();
+		int netSize = s.nextInt();
+		int nOfTrees = s.nextInt();
+		s.nextLine();
 		problem = new Problem(time, netSize, nOfTrees);
 		
+		List<String> input = new ArrayList<String>();
 		
+		while(s.hasNextLine() && nOfTrees > 0){
+			input.add(s.nextLine());
+			nOfTrees--;
+		}
+		
+		
+		problem = ReadProblemFromInput(input);
+		s.close();
+		return problem;
+	}
+	
+	
 
-		for (int i = 1; i < input.size(); i++) {
+	private Problem ReadProblemFromInput(List<String> input) {
+		for (int i = 0; i < input.size(); i++) {
 			String nextLine = input.get(i);
-			scanner = new Scanner(nextLine);
+			Scanner scanner = new Scanner(nextLine);
 
 			int x = scanner.nextInt();
 			int y = scanner.nextInt();
@@ -36,22 +55,11 @@ public class InputReader {
 			int weightC = scanner.nextInt();
 			int valueP = scanner.nextInt();
 
-			Tree tree = new Tree(i-1, heightH, thicknessD, weightC, valueP, x, y);
+			Tree tree = new Tree(i, heightH, thicknessD, weightC, valueP, x, y);
+			scanner.close();
 			problem.addTree(tree);
 		}
-		scanner.close();
-		return problem;
-	}
-
-	public Problem ReadProblemFromFile(String filePath) {
-		try {
-			Path path = Paths.get(filePath);
-			List<String> lines = Files.readAllLines(path);
-			problem = ReadProblemFromInput(lines);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		
 		return problem;
 	}
 }
