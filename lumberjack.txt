@@ -1,22 +1,22 @@
 Informacje:
 Lumberjack
-Aby uzyskaæ ocenê 3.0 z projektu nale¿y:
+Aby uzyskaÄ‡ ocenÄ™ 3.0 z projektu naleÅ¼y:
 
-W serwisie Optil.io zapisaæ siê na konkurs Lumberjack Challenge.
-Do dnia 31 stycznia 2017 w³¹cznie zg³osiæ rozwi¹zanie zadania Lumberjack w serwisie Optil.io, które dla co najmniej 10 instancji dostanie wiêcej ni¿ 0 punktów.
-Do dnia 2 lutego 2017 w³¹cznie zg³osiæ kod rozwi¹zania przez system Moodle, korzystaj¹c z tego formularza.
-Ocenê mo¿na sobie podwy¿szyæ poprzez (w nawiasie podano o ile):
+W serwisie Optil.io zapisaÄ‡ siÄ™ na konkurs Lumberjack Challenge.
+Do dnia 31 stycznia 2017 wÅ‚Ä…cznie zgÅ‚osiÄ‡ rozwiÄ…zanie zadania Lumberjack w serwisie Optil.io, ktÃ³re dla co najmniej 10 instancji dostanie wiÄ™cej niÅ¼ 0 punktÃ³w.
+Do dnia 2 lutego 2017 wÅ‚Ä…cznie zgÅ‚osiÄ‡ kod rozwiÄ…zania przez system Moodle, korzystajÄ…c z tego formularza.
+OcenÄ™ moÅ¼na sobie podwyÅ¼szyÄ‡ poprzez (w nawiasie podano o ile):
 
-(+0.5) Znalezienie siê w Top 10 rankingu na koniec konkursu (31 stycznia 2017).
-(+0.5) Znalezienie siê w Top 10 rankingu na koniec dnia 22 grudnia 2016.
-(+0.2) Zg³oszenie do koñca dnia 22 grudnia 2016 rozwi¹zania, które otrzyma wiêcej punktów ni¿ udostêpniony szablon (liczy siê ostatnie zg³oszenie przed t¹ dat¹).
-(+0.3) Zg³oszenie do koñca dnia 22 grudnia 2016 rozwi¹zania, które otrzyma dwa razy wiêcej punktów ni¿ udostêpniony szablon (liczy siê ostatnie zg³oszenie przed t¹ dat¹).
-(+0.5) Zg³oszenie do koñca konkursu rozwi¹zania, które otrzyma dwa razy wiêcej punktów ni¿ udostêpniony szablon (liczy siê ostatnie zg³oszenie przed koñcem konkursu).
-(+0.5) Zg³oszenie kodu, który przejdzie weryfikacjê stylu kodowania.
+(+0.5) Znalezienie siÄ™ w Top 10 rankingu na koniec konkursu (31 stycznia 2017).
+(+0.5) Znalezienie siÄ™ w Top 10 rankingu na koniec dnia 22 grudnia 2016.
+(+0.2) ZgÅ‚oszenie do koÅ„ca dnia 22 grudnia 2016 rozwiÄ…zania, ktÃ³re otrzyma wiÄ™cej punktÃ³w niÅ¼ udostÄ™pniony szablon (liczy siÄ™ ostatnie zgÅ‚oszenie przed tÄ… datÄ…).
+(+0.3) ZgÅ‚oszenie do koÅ„ca dnia 22 grudnia 2016 rozwiÄ…zania, ktÃ³re otrzyma dwa razy wiÄ™cej punktÃ³w niÅ¼ udostÄ™pniony szablon (liczy siÄ™ ostatnie zgÅ‚oszenie przed tÄ… datÄ…).
+(+0.5) ZgÅ‚oszenie do koÅ„ca konkursu rozwiÄ…zania, ktÃ³re otrzyma dwa razy wiÄ™cej punktÃ³w niÅ¼ udostÄ™pniony szablon (liczy siÄ™ ostatnie zgÅ‚oszenie przed koÅ„cem konkursu).
+(+0.5) ZgÅ‚oszenie kodu, ktÃ³ry przejdzie weryfikacjÄ™ stylu kodowania.
 (+0.3) Wygenerowanie dokumentacji dla napisanego kodu w formacie HTML.
-(+0.2) Napisanie raportu opisuj¹cego zaimplementowane rozwi¹zanie.
+(+0.2) Napisanie raportu opisujÄ…cego zaimplementowane rozwiÄ…zanie.
 
-Wieksza instancja wejœcia:
+Wieksza instancja wejscia:
 160 50 99
 0 27 7 9 24 116
 1 17 7 5 212 344
