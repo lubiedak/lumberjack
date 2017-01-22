@@ -24,5 +24,14 @@ public class TestReading {
 		System.out.println(p);
 
 	}
+	
+	@Test
+	public void testTreesInRangeLineAndHeavier() {
+
+		//TODO
+		// Create small forest 5 trees in shape of +
+		// make middle one the heaviest, check if can fall on all surrounding trees after problem solved.
+
+	}
 
 }

@@ -32,6 +32,7 @@ public class Problem {
 		countDistances();
 		countProfitability();
 		countProfitabilityDividedByCutCost();
+		countIfCanFallATree();
 	}
 	
 	public void solve(){
@@ -70,17 +71,12 @@ public class Problem {
 	}
 	
 	public void countIfCanFallATree(){
-		for(int i = 0; i < trees.size(); ++i){
-			for(int j = 0; j < trees.size(); ++j){
-				//TODO: distancesBetweenTrees[i][j] = // if i is able to fall on j and cut it; 
-				//1. dodac do klasy tree zmienna int[] canFallATree = int[4];
-				//2. w tej funkcji znalezc wszystkich sasiadow tree ktore drzewo przewraca
-				//3. sprawdzamy pion, poziom < height, potem ciężar 
-				//4. jeżeli true to set canfallatree[z] = tree.id
+		for(Tree i : trees){
+			for(Tree j : trees){
+				Direction dir = i.IsInLineAndRangeAndHeavier(j);
+				if(dir != Direction.NOT_IN_LINE)
+					i.addTreeAbleToFall(dir, j);
 			}
-		}
-		for (Tree t : trees){
-			//kiedy bedziesz pisal?
 		}
 	}
 	
