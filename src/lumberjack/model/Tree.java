@@ -91,16 +91,21 @@ public class Tree {
 
 	public Direction IsInLineAndRangeAndHeavier(Tree tree) {
 		if (x == tree.getX()) {
-			int distance = x - tree.getX();
+			int distance = y - tree.getY();
 			if (Math.abs(distance) <= heightH && getTreeWeight() > tree.getTreeWeight())
 				return (distance > 0) ? Direction.DOWN : Direction.UP;
 		}
 		if (y == tree.getY()) {
-			int distance = y - tree.getY();
+			int distance = x - tree.getX();
 			if (Math.abs(distance) <= heightH && getTreeWeight() > tree.getTreeWeight())
 				return (distance > 0) ? Direction.LEFT : Direction.RIGHT;
 		}
 
 		return Direction.NOT_IN_LINE;
 	}
+
+	public int[] getTreesAbleToFall() {
+		return treesAbleToFall;
+	}
+
 }

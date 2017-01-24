@@ -1,13 +1,15 @@
 package test;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import lumberjack.input.InputReader;
 import lumberjack.model.Problem;
+import lumberjack.model.Tree;
 
 public class TestReading {
 
-	@Test
+	//@Test
 	public void test() {
 
 		String input = 	 "11 10 5\n"
@@ -27,11 +29,25 @@ public class TestReading {
 	
 	@Test
 	public void testTreesInRangeLineAndHeavier() {
-
-		//TODO
-		// Create small forest 5 trees in shape of +
-		// make middle one the heaviest, check if can fall on all surrounding trees after problem solved.
-
+	
+		String input = 	 "11 3 5\n"
+				+"1 1 2 2 2 2\n"
+				+"0 1 1 1 1 1\n"
+				+"1 0 1 1 1 1\n"
+				+"2 1 1 1 1 1\n"
+				+"1 2 1 1 1 1\n";
+		
+		InputReader ir = new InputReader();
+		Problem p = ir.ReadProblemFromString(input);
+		p.analyze();
+				
+		p.solve();
+		System.out.println(p);
+		
+		int[] treesAbleToFall = p.getTree(0).getTreesAbleToFall();
+		int[] expectedTreesAbleToFall = {4, 3, 2, 1};
+		
+		Assert.assertArrayEquals(expectedTreesAbleToFall, treesAbleToFall);
 	}
 
 }

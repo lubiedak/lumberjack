@@ -28,6 +28,10 @@ public class Problem {
 		net[tree.getY()][tree.getX()] = tree.getId();
 	}
 	
+	public Tree getTree(int id){
+		return trees.stream().filter(t -> t.getId() == id).findFirst().get();
+	}
+	
 	public void analyze(){
 		countDistances();
 		countProfitability();
@@ -41,14 +45,14 @@ public class Problem {
 		lumberjack.moveRight();
 	}
 	
-	public void countProfitability(){
+	private void countProfitability(){
 		for(Tree tree : trees){
 			profitabilityNet[tree.getY()][tree.getX()] = tree.getTreeValue();
 		}
 	}
 	
 	
-	public void countDistances(){
+	private void countDistances(){
 		for(int i = 0; i < trees.size(); ++i){
 			for(int j = 0; j < trees.size(); ++j){
 				distancesBetweenTrees[i][j] = Math.abs(trees.get(i).getX() - trees.get(j).getX())
@@ -57,25 +61,27 @@ public class Problem {
 		}
 	}
 	
-	public void countProfitabilityDividedByCutCost(){
+	private void countProfitabilityDividedByCutCost(){
 		for(Tree tree : trees){
 			profitabilityNetByCutCost[tree.getY()][tree.getX()] = (tree.getTreeValue()) / tree.getTimeNeededToCut();
 		}
 	}
 	
-	public void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree(){
+	private void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree(){
 		//TODO
 		//tablica floatow - w ktora strone najlepiej sciac drzewo, zeby obaliło inne i tymczasem mamy 2 drzewa sciete, wiekszy profit
 		//Ciut trudniejsze ale dasz rade
 		
 	}
 	
-	public void countIfCanFallATree(){
+	private void countIfCanFallATree(){
 		for(Tree i : trees){
 			for(Tree j : trees){
-				Direction dir = i.IsInLineAndRangeAndHeavier(j);
-				if(dir != Direction.NOT_IN_LINE)
-					i.addTreeAbleToFall(dir, j);
+				if(!i.equals(j)){
+					Direction dir = i.IsInLineAndRangeAndHeavier(j);
+					if(dir != Direction.NOT_IN_LINE)
+						i.addTreeAbleToFall(dir, j);
+				}
 			}
 		}
 	}

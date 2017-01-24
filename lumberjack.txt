@@ -8,9 +8,6 @@ Do dnia 2 lutego 2017 włącznie zgłosić kod rozwiązania przez system Moodle,
 Ocenę można sobie podwyższyć poprzez (w nawiasie podano o ile):
 
 (+0.5) Znalezienie się w Top 10 rankingu na koniec konkursu (31 stycznia 2017).
-(+0.5) Znalezienie się w Top 10 rankingu na koniec dnia 22 grudnia 2016.
-(+0.2) Zgłoszenie do końca dnia 22 grudnia 2016 rozwiązania, które otrzyma więcej punktów niż udostępniony szablon (liczy się ostatnie zgłoszenie przed tą datą).
-(+0.3) Zgłoszenie do końca dnia 22 grudnia 2016 rozwiązania, które otrzyma dwa razy więcej punktów niż udostępniony szablon (liczy się ostatnie zgłoszenie przed tą datą).
 (+0.5) Zgłoszenie do końca konkursu rozwiązania, które otrzyma dwa razy więcej punktów niż udostępniony szablon (liczy się ostatnie zgłoszenie przed końcem konkursu).
 (+0.5) Zgłoszenie kodu, który przejdzie weryfikację stylu kodowania.
 (+0.3) Wygenerowanie dokumentacji dla napisanego kodu w formacie HTML.
