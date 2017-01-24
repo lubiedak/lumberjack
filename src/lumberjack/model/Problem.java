@@ -8,7 +8,6 @@ public class Problem {
 	int[][] net;
 	int[][] profitabilityNet;
 	int[][] distancesBetweenTrees;
-	int[][] maxProfitabilityNet;
 	int[][] profitabilityNetByCutCost;
 	
 	ArrayList<Tree> trees;
@@ -70,6 +69,7 @@ public class Problem {
 	}
 	
 	private void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree(){
+		//TODO - could be separated into smaller chunks
 		for(Tree tree : trees){
 			int[] maxProfit = new int[4];
 			Arrays.fill(maxProfit, tree.getTreeValue());
@@ -85,10 +85,16 @@ public class Problem {
 					currentTreeId = currentTree.getTreesAbleToFall()[i];
 				}
 			}
-			System.out.println(tree);
-			System.out.println(Arrays.toString(maxProfit));
 			
-			maxProfitabilityNet[tree.getY()][tree.getX()] = 0;
+			int biggestProfit = 0;
+			int direction = 0;
+			for(int i = 0; i < maxProfit.length; ++i){
+				if(maxProfit[i] > biggestProfit){
+					direction = i;
+					biggestProfit = maxProfit[i];
+				}
+			}
+			tree.setDirectionAndProfit(direction, biggestProfit);
 		}
 		
 	}
@@ -121,7 +127,7 @@ public class Problem {
 		
 		info += "\nProfitabilityNetByCutCost:\n";
 		info += printMatrix(profitabilityNetByCutCost);
-		
+				
 		info += "\nTrees:\n";
 		for (Tree tree : trees) {
 			info += "\n" + tree;
@@ -148,13 +154,11 @@ public class Problem {
 		net = new int[netSize][];
 		profitabilityNet = new int[netSize][];
 		profitabilityNetByCutCost = new int[netSize][];
-		maxProfitabilityNet = new int[netSize][];
 		for (int i = 0; i < netSize; ++i) {
 			
 			net[i] = new int[netSize];
 			Arrays.fill(net[i], -1);
 			profitabilityNet[i] = new int[netSize];
-			maxProfitabilityNet[i] = new int[netSize];
 			profitabilityNetByCutCost[i] = new int[netSize];
 		}
 	}

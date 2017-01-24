@@ -5,11 +5,10 @@ import org.junit.Test;
 
 import lumberjack.input.InputReader;
 import lumberjack.model.Problem;
-import lumberjack.model.Tree;
 
 public class TestReading {
 
-	//@Test
+	@Test
 	public void test() {
 
 		String input = 	 "11 10 5\n"
@@ -49,5 +48,7 @@ public class TestReading {
 		
 		Assert.assertArrayEquals(expectedTreesAbleToFall, treesAbleToFall);
 	}
+	
+	
 
 }
