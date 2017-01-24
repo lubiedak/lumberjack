@@ -32,7 +32,7 @@ public class TestReading {
 	
 		String input = 	 "11 3 5\n"
 				+"1 1 2 2 2 2\n"
-				+"0 1 1 1 1 1\n"
+				+"0 1 1 1 1 2\n"
 				+"1 0 1 1 1 1\n"
 				+"2 1 1 1 1 1\n"
 				+"1 2 1 1 1 1\n";

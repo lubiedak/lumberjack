@@ -14,7 +14,7 @@ public class Tree {
 	private final int y;
 
 	private boolean cut;
-	private int[] treesAbleToFall;
+	private int[] treesAbleToFall = {-1,-1,-1,-1};
 
 	public Tree(int id, int heightH, int thicknessD, int weightC, int valueP, int x, int y) {
 		super();
@@ -25,8 +25,7 @@ public class Tree {
 		this.unitValueP = valueP;
 		this.x = x;
 		this.y = y;
-		this.cut = false;
-		treesAbleToFall = new int[4]; // up, right, down, left
+		this.cut = false; // up, right, down, left
 	}
 
 	@Override

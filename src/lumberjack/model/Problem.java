@@ -8,6 +8,7 @@ public class Problem {
 	int[][] net;
 	int[][] profitabilityNet;
 	int[][] distancesBetweenTrees;
+	int[][] maxProfitabilityNet;
 	int[][] profitabilityNetByCutCost;
 	
 	ArrayList<Tree> trees;
@@ -37,6 +38,7 @@ public class Problem {
 		countProfitability();
 		countProfitabilityDividedByCutCost();
 		countIfCanFallATree();
+		countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree();
 	}
 	
 	public void solve(){
@@ -68,9 +70,26 @@ public class Problem {
 	}
 	
 	private void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree(){
-		//TODO
-		//tablica floatow - w ktora strone najlepiej sciac drzewo, zeby obaliło inne i tymczasem mamy 2 drzewa sciete, wiekszy profit
-		//Ciut trudniejsze ale dasz rade
+		for(Tree tree : trees){
+			int[] maxProfit = new int[4];
+			Arrays.fill(maxProfit, tree.getTreeValue());
+			
+			int[] treesAbleToFall = tree.getTreesAbleToFall();
+			
+			for(int i = 0; i < treesAbleToFall.length ; ++i){
+				int currentTreeId = treesAbleToFall[i];
+				
+				while(currentTreeId >= 0){
+					Tree currentTree = getTree(currentTreeId);
+					maxProfit[i] += getTree(currentTreeId).getTreeValue();
+					currentTreeId = currentTree.getTreesAbleToFall()[i];
+				}
+			}
+			System.out.println(tree);
+			System.out.println(Arrays.toString(maxProfit));
+			
+			maxProfitabilityNet[tree.getY()][tree.getX()] = 0;
+		}
 		
 	}
 	
@@ -129,11 +148,13 @@ public class Problem {
 		net = new int[netSize][];
 		profitabilityNet = new int[netSize][];
 		profitabilityNetByCutCost = new int[netSize][];
+		maxProfitabilityNet = new int[netSize][];
 		for (int i = 0; i < netSize; ++i) {
 			
 			net[i] = new int[netSize];
 			Arrays.fill(net[i], -1);
 			profitabilityNet[i] = new int[netSize];
+			maxProfitabilityNet[i] = new int[netSize];
 			profitabilityNetByCutCost[i] = new int[netSize];
 		}
 	}
