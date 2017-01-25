@@ -12,7 +12,7 @@ import lumberjack.model.Problem;
 
 public class TestReading {
 
-	@Test
+	//@Test
 	public void test() {
 
 		String input = 	 "11 10 5\n"
@@ -30,7 +30,7 @@ public class TestReading {
 
 	}
 	
-	@Test
+	//@Test
 	public void testTreesInRangeLineAndHeavier() {
 	
 		String input = 	 "11 3 5\n"
@@ -51,6 +51,22 @@ public class TestReading {
 		int[] expectedTreesAbleToFall = {4, 3, 2, 1};
 		
 		Assert.assertArrayEquals(expectedTreesAbleToFall, treesAbleToFall);
+	}
+	
+	
+	@Test
+	public void testMediumProblem() {
+	
+		TestCasesGenerator generator = new TestCasesGenerator(50, 15, 20);
+		
+		String input = generator.getProblem();
+		
+		InputReader ir = new InputReader();
+		Problem p = ir.ReadProblemFromString(input);
+		p.analyze();
+				
+		p.solve();
+		System.out.println(p);
 	}
 	
 	//@Test
