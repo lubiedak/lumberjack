@@ -39,7 +39,7 @@ public class LumberJack {
 	}
 
 	public void goToTree(Tree tree) {
-		while (x != tree.getX()) {
+		while (x != tree.getX() && timeToWalk > 0) {
 			if (tree.getX() > x) {
 				moveRight();
 			} else {
@@ -47,7 +47,7 @@ public class LumberJack {
 			}
 		}
 
-		while (y != tree.getY()) {
+		while (y != tree.getY() && timeToWalk > 0) {
 			if (tree.getY() > y) {
 				moveUp();
 			} else {
@@ -57,32 +57,36 @@ public class LumberJack {
 	}
 
 	public void moveUp() {
-		decisions.add("Move up");
+		decisions.add("move up");
 		y++;
 		timeToWalk--;
 	}
 
 	public void moveDown() {
-		decisions.add("Move down");
+		decisions.add("move down");
 		y--;
 		timeToWalk--;
 	}
 
 	public void moveRight() {
-		decisions.add("Move right");
+		decisions.add("move right");
 		x++;
 		timeToWalk--;
 	}
 
 	public void moveLeft() {
-		decisions.add("Move left");
+		decisions.add("move left");
 		x--;
 		timeToWalk--;
 	}
 
-	public void cutTree(String cutDirection, Tree tree) {
-		decisions.add(cutDirection);
-		timeToWalk -= tree.getTimeNeededToCut();
+	public void cutTree(Direction cutDirection, Tree tree) {
+		if(tree.getTimeNeededToCut() < timeToWalk){
+			Direction direction = cutDirection == Direction.NOT_IN_LINE ? Direction.UP : cutDirection; 
+			decisions.add("cut " + direction.toString().toLowerCase());
+			timeToWalk -= tree.getTimeNeededToCut();
+			tree.cutTree();
+		}
 	}
 	
 	

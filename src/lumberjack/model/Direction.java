@@ -10,4 +10,5 @@ public enum Direction {
 	private final int dir;
 	Direction(int dir) { this.dir = dir; }
 	public int getDir() { return dir; }
+	public Direction asDir(int intDir){ return Direction.values()[intDir];}
 }

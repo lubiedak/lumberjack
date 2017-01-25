@@ -1,6 +1,9 @@
 package lumberjack;
 
+import java.util.List;
+
 import lumberjack.input.InputReader;
+import lumberjack.model.Problem;
 
 public class Main {
 
@@ -8,7 +11,13 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		InputReader ir = new InputReader();
-		ir.ReadProblemFromInputStream(System.in);
+		Problem p = ir.ReadProblemFromInputStream(System.in);
+		p.analyze();
+		List<String> decisions = p.solve();
+		for(String dec : decisions){
+			System.out.println(dec);
+		}
+		
 		
 	}
 

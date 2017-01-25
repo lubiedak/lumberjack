@@ -15,9 +15,12 @@ public class Tree {
 
 	private boolean cut;
 	private int[] treesAbleToFall = { -1, -1, -1, -1 };
-	private int bestDirectionToFall;
+	private Direction bestDirectionToFall;
 	private int maxProfit;
 
+	
+	
+	
 	public Tree(int id, int heightH, int thicknessD, int weightC, int valueP, int x, int y) {
 		super();
 		this.id = id;
@@ -30,6 +33,18 @@ public class Tree {
 		this.cut = false; // up, right, down, left
 	}
 
+	public Tree() {
+		super();
+		this.id = -1;
+		this.heightH = -1;
+		this.thicknessD = -1;
+		this.unitWeightC = -1;
+		this.unitValueP = -1;
+		this.x = -1;
+		this.y = -1;
+		this.cut = false; // up, right, down, left
+	}
+	
 	@Override
 	public String toString() {
 		return "Tree [id=" + id + ", heightH=" + heightH + ", thicknessD=" + thicknessD + ", unitWeightC=" + unitWeightC
@@ -79,8 +94,9 @@ public class Tree {
 		return y;
 	}
 
-	public void cutTree() {
+	public int cutTree() {
 		cut = true;
+		return getTreeValue();
 	}
 
 	public boolean isCut() {
@@ -91,9 +107,13 @@ public class Tree {
 		treesAbleToFall[dir.ordinal()] = tree.getId();
 	}
 
-	public void setDirectionAndProfit(int direction, int profit) {
+	public void setDirectionAndProfit(Direction direction, int profit) {
 		bestDirectionToFall = direction;
 		maxProfit = profit;
+	}
+
+	public Direction getBestDirectionToFall() {
+		return bestDirectionToFall;
 	}
 
 	public Direction IsInLineAndRangeAndHeavier(Tree tree) {

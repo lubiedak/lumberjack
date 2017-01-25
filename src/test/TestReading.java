@@ -56,7 +56,6 @@ public class TestReading {
 	
 	@Test
 	public void testMediumProblem() {
-	
 		TestCasesGenerator generator = new TestCasesGenerator(50, 15, 20);
 		
 		String input = generator.getProblem();

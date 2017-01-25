@@ -40,10 +40,30 @@ public class Problem {
 		countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree();
 	}
 
-	public void solve() {
-		lumberjack.goToTree(trees.get(0));
-		lumberjack.cutTree("Cut up", trees.get(0));
-		lumberjack.moveRight();
+	public ArrayList<String> solve() {
+		while (lumberjack.getTimeToWalk() > 0) {
+			Tree t = findClosestTree();
+			lumberjack.goToTree(t);
+			Direction dir = t.getBestDirectionToFall();
+			lumberjack.cutTree(dir, t);
+		}
+		return lumberjack.getDecisions();
+	}
+
+	private Tree findClosestTree() {
+		int x = lumberjack.getX();
+		int y = lumberjack.getY();
+
+		int minDistance = 9999;
+		Tree closestTree = new Tree();
+		for (Tree tree : trees) {
+			int distance = Math.abs(x - tree.getX()) + Math.abs(y - tree.getY());
+			if (distance > 0 && distance < minDistance && !tree.isCut()) {
+				closestTree = tree;
+				minDistance = distance;
+			}
+		}
+		return closestTree;
 	}
 
 	private void countProfitability() {
@@ -93,7 +113,7 @@ public class Problem {
 					biggestProfit = maxProfit[i];
 				}
 			}
-			tree.setDirectionAndProfit(direction, biggestProfit);
+			tree.setDirectionAndProfit(Direction.values()[direction], biggestProfit);
 		}
 
 	}
@@ -137,7 +157,6 @@ public class Problem {
 	private String printMatrix(int[][] matrix) {
 		String info = "";
 		for (int i = 0; i < matrix.length; ++i) {
-
 			for (int j = 0; j < matrix[i].length; ++j) {
 
 				info += (matrix[i][j] >= 0 ? matrix[i][j] : ".") + "\t";
