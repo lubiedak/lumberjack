@@ -1,5 +1,9 @@
 package test;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,7 +12,7 @@ import lumberjack.model.Problem;
 
 public class TestReading {
 
-	@Test
+	//@Test
 	public void test() {
 
 		String input = 	 "11 10 5\n"
@@ -26,7 +30,7 @@ public class TestReading {
 
 	}
 	
-	@Test
+	//@Test
 	public void testTreesInRangeLineAndHeavier() {
 	
 		String input = 	 "11 3 5\n"
@@ -49,6 +53,20 @@ public class TestReading {
 		Assert.assertArrayEquals(expectedTreesAbleToFall, treesAbleToFall);
 	}
 	
+	@Test
+	public void testLargerProblem() throws URISyntaxException, UnsupportedEncodingException, IOException {
 	
+		java.net.URL url = TestReading.class.getResource("largeForest.txt");
+        java.nio.file.Path resPath = java.nio.file.Paths.get(url.toURI());
+        String input = new String(java.nio.file.Files.readAllBytes(resPath), "UTF8"); 
+		
+        InputReader ir = new InputReader();
+		Problem p = ir.ReadProblemFromString(input);
+		p.analyze();
+				
+		p.solve();
+		System.out.println(p);
+		
+	}	
 
 }

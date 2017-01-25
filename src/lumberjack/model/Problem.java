@@ -86,8 +86,8 @@ public class Problem {
 				}
 			}
 			
-			int biggestProfit = 0;
-			int direction = 0;
+			int biggestProfit = tree.getTreeValue();
+			int direction = Direction.NOT_IN_LINE.ordinal();
 			for(int i = 0; i < maxProfit.length; ++i){
 				if(maxProfit[i] > biggestProfit){
 					direction = i;
