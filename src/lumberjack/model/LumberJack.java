@@ -35,10 +35,14 @@ public class LumberJack {
 	public int getTimeToWalk() {
 		return timeToWalk;
 	}
+	
+	public void finishTrip(){
+		timeToWalk = 0;
+	}
 
 	@Override
 	public String toString() {
-		return "LumberJack [x=" + x + ", y=" + y + ", decisions=" + decisions
+		return "LumberJack [timeToWalk=" + timeToWalk + ", x=" + x + ", y=" + y + ", decisions=" + decisions
 				+ ", TimeLeft=" + decisionsCost + ", additionalInfo=" + additionalInfo + "]";
 	}
 
@@ -88,7 +92,7 @@ public class LumberJack {
 		decisionsCost.add(timeToWalk);
 	}
 
-	public void cutTree(Direction cutDirection, Tree tree) {
+	public boolean cutTree(Direction cutDirection, Tree tree) {
 		if(tree.getTimeNeededToCut() < timeToWalk){
 			Direction direction = cutDirection == Direction.NOT_IN_LINE ? Direction.UP : cutDirection; 
 			
@@ -98,9 +102,11 @@ public class LumberJack {
 			tree.cutTree();
 			decisionsCost.add(timeToWalk);
 			additionalInfo.add("---x=" + x + ", y=" + y + ", tree cut=" + tree.getId() + ", Direction=" + direction + "---");
+			return true;
 		}else{
 			//Tried to cut but didn't make it
 			timeToWalk = 0;
+			return false;
 		}
 	}
 	

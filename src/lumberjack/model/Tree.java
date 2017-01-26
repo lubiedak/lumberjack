@@ -102,9 +102,13 @@ public class Tree {
 	public boolean isCut() {
 		return cut;
 	}
+	
+	public int getIdOfNeighbourInThisDirection(Direction dir){
+		return treesAbleToFall[dir.ordinal()];
+	}
 
-	public void addTreeAbleToFall(Direction dir, Tree tree) {
-		treesAbleToFall[dir.ordinal()] = tree.getId();
+	public void addTreeAbleToFall(Tree tree) {
+		treesAbleToFall[isInLine(tree).ordinal()] = tree.getId();
 	}
 
 	public void setDirectionAndProfit(Direction direction, int profit) {
@@ -114,6 +118,10 @@ public class Tree {
 
 	public Direction getBestDirectionToFall() {
 		return bestDirectionToFall;
+	}
+
+	public int getMaxProfit() {
+		return maxProfit;
 	}
 
 	public Direction IsInLineAndRangeAndHeavier(Tree tree) {

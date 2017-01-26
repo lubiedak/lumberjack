@@ -33,9 +33,9 @@ public class Problem {
 	}
 
 	public void analyze() {
-		countDistances();
-		countProfitability();
-		countProfitabilityDividedByCutCost();
+		//countDistances();
+		//countProfitability();
+		//countProfitabilityDividedByCutCost();
 		countIfCanFallATree();
 		countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree();
 	}
@@ -43,11 +43,29 @@ public class Problem {
 	public ArrayList<String> solve() {
 		while (lumberjack.getTimeToWalk() > 0) {
 			Tree t = findClosestTree();
-			lumberjack.goToTree(t);
-			Direction dir = t.getBestDirectionToFall();
-			lumberjack.cutTree(dir, t);
+			//Tree t = findClosestTree2();
+			if (t.getId() != -1) {
+				lumberjack.goToTree(t);
+				Direction dir = t.getBestDirectionToFall();
+				boolean treeCut = lumberjack.cutTree(dir, t);
+				if (dir != Direction.NOT_IN_LINE && treeCut)
+					runDominoEffect(t);
+				countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree();
+			}else{
+				lumberjack.finishTrip();
+			}
 		}
 		return lumberjack.getDecisions();
+	}
+
+	private void runDominoEffect(Tree tree) {
+		Direction dir = tree.getBestDirectionToFall();
+		int id = tree.getIdOfNeighbourInThisDirection(dir);
+		while (id != -1) {
+			Tree t = trees.get(id);
+			t.cutTree();
+			id = t.getIdOfNeighbourInThisDirection(dir);
+		}
 	}
 
 	private Tree findClosestTree() {
@@ -61,6 +79,25 @@ public class Problem {
 			if (distance < minDistance && !tree.isCut()) {
 				closestTree = tree;
 				minDistance = distance;
+			}
+		}
+		return closestTree;
+	}
+	
+	private Tree findClosestTree2() {
+		int x = lumberjack.getX();
+		int y = lumberjack.getY();
+
+		int minValuePerCost = 0;
+		Tree closestTree = new Tree();
+		for (Tree tree : trees) {
+			int cost = Math.abs(x - tree.getX()) + Math.abs(y - tree.getY()) + tree.getThicknessD();
+			if (cost < lumberjack.getTimeToWalk()) {
+				int valuePerCost = tree.getMaxProfit() / cost;
+				if (valuePerCost > minValuePerCost && !tree.isCut()) {
+					closestTree = tree;
+					minValuePerCost = valuePerCost;
+				}
 			}
 		}
 		return closestTree;
@@ -90,6 +127,7 @@ public class Problem {
 	private void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree() {
 		// TODO - could be separated into smaller chunks
 		for (Tree tree : trees) {
+			if(!tree.isCut()){
 			int[] maxProfit = new int[4];
 			Arrays.fill(maxProfit, tree.getTreeValue());
 
@@ -114,23 +152,22 @@ public class Problem {
 				}
 			}
 			tree.setDirectionAndProfit(Direction.values()[direction], biggestProfit);
-		}
-
+		}}
 	}
 
 	private void countIfCanFallATree() {
 		for (Tree i : trees) {
 			for (Tree j : trees) {
 				if (!i.equals(j)) {
-					if (areNeighbors(i, j)) {
-						Direction dir = i.IsInLineAndRangeAndHeavier(j);
-
-						if (dir != Direction.NOT_IN_LINE)
-							i.addTreeAbleToFall(dir, j);
-					}
+					if (checkIfICanFallOnJ(i, j))
+						i.addTreeAbleToFall(j);
 				}
 			}
 		}
+	}
+
+	private boolean checkIfICanFallOnJ(Tree i, Tree j) {
+		return areNeighbors(i, j) && i.IsInLineAndRangeAndHeavier(j) != Direction.NOT_IN_LINE;
 	}
 
 	private boolean areNeighbors(Tree a, Tree b) {
