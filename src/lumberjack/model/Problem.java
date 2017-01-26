@@ -58,7 +58,7 @@ public class Problem {
 		Tree closestTree = new Tree();
 		for (Tree tree : trees) {
 			int distance = Math.abs(x - tree.getX()) + Math.abs(y - tree.getY());
-			if (distance > 0 && distance < minDistance && !tree.isCut()) {
+			if (distance < minDistance && !tree.isCut()) {
 				closestTree = tree;
 				minDistance = distance;
 			}
@@ -122,12 +122,37 @@ public class Problem {
 		for (Tree i : trees) {
 			for (Tree j : trees) {
 				if (!i.equals(j)) {
-					Direction dir = i.IsInLineAndRangeAndHeavier(j);
-					if (dir != Direction.NOT_IN_LINE)
-						i.addTreeAbleToFall(dir, j);
+					if (areNeighbors(i, j)) {
+						Direction dir = i.IsInLineAndRangeAndHeavier(j);
+
+						if (dir != Direction.NOT_IN_LINE)
+							i.addTreeAbleToFall(dir, j);
+					}
 				}
 			}
 		}
+	}
+
+	private boolean areNeighbors(Tree a, Tree b) {
+		Direction dir = a.isInLine(b);
+		if (dir != Direction.NOT_IN_LINE) {
+			int x = a.getX();
+			int y = a.getY();
+			x += dir.increaseX();
+			y += dir.increaseY();
+			for (int i = 0; i < distancesBetweenTrees[a.getId()][b.getId()] - 1; ++i) {
+
+				if (net[y][x] != -1)
+					return false;
+				x += dir.increaseX();
+				y += dir.increaseY();
+			}
+			if (net[y][x] == b.getId())
+				return true;
+		} else {
+			return false;
+		}
+		return false;
 	}
 
 	@Override

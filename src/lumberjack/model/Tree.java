@@ -117,22 +117,31 @@ public class Tree {
 	}
 
 	public Direction IsInLineAndRangeAndHeavier(Tree tree) {
+		Direction dir = isInLine(tree);
+		if(getTreeWeight() > tree.getTreeWeight()){
+			return dir;
+		}
+		return Direction.NOT_IN_LINE;
+	}
+
+	public Direction isInLine(Tree tree){
 		if (x == tree.getX()) {
 			int distance = y - tree.getY();
-			if (Math.abs(distance) <= heightH && getTreeWeight() > tree.getTreeWeight())
+			if (Math.abs(distance) <= heightH)
 				return (distance > 0) ? Direction.DOWN : Direction.UP;
 		}
 		if (y == tree.getY()) {
 			int distance = x - tree.getX();
-			if (Math.abs(distance) <= heightH && getTreeWeight() > tree.getTreeWeight())
+			if (Math.abs(distance) <= heightH)
 				return (distance > 0) ? Direction.LEFT : Direction.RIGHT;
 		}
-
 		return Direction.NOT_IN_LINE;
 	}
-
+	
 	public int[] getTreesAbleToFall() {
 		return treesAbleToFall;
 	}
+	
+	
 
 }
