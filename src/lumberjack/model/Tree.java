@@ -45,6 +45,61 @@ public class Tree {
 		this.cut = false; // up, right, down, left
 	}
 	
+	public static class Builder{
+		private final int id;
+		
+		
+		private int x = 0;
+		private int y = 0;
+		
+		private int heightH = 0;
+		private int thicknessD = 0;
+		private int unitWeightC = 0;
+		private int unitValueP = 0;
+		
+		public Builder(int id){
+			this.id = id;
+		}
+		
+		public Builder x(int val){
+			x = val; return this;
+		}
+		
+		public Builder y(int val){
+			y = val; return this;
+		}
+		
+		public Builder height(int val){
+			heightH = val; return this;
+		}
+		
+		public Builder thickness(int val){
+			thicknessD = val; return this;
+		}
+		
+		public Builder unitWeight(int val){
+			unitWeightC = val; return this;
+		}
+		public Builder unitValue(int val){
+			unitValueP = val; return this;
+		}
+		
+		public Tree build(){
+			return new Tree(this);
+		}
+		
+
+	}
+
+	private Tree(Builder b){
+		x = b.x;
+		y = b.y;
+		heightH = b.heightH;
+		thicknessD = b.thicknessD;
+		unitWeightC = b.unitWeightC;
+		unitValueP = b.unitValueP;
+	}
+	
 	@Override
 	public String toString() {
 		return "Tree [id=" + id + ", heightH=" + heightH + ", thicknessD=" + thicknessD + ", unitWeightC=" + unitWeightC
