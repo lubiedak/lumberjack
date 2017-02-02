@@ -12,7 +12,7 @@ import lumberjack.model.Tree;
 
 public class InputReader {
 
-	Problem problem;
+	private Problem problem;
 
 	
 	public Problem ReadProblemFromString(String input){

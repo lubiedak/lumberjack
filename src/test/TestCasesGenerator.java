@@ -4,11 +4,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class TestCasesGenerator {
 
-	String problem;
-	int maxDim; //covers x, y, height
-	int maxD; //thickness
-	int maxC; //weight
-	int maxP; //profit
+	private String problem;
+	private int maxDim; //covers x, y, height
+	private int maxD; //thickness
+	private int maxC; //weight
+	private int maxP; //profit
 	
 	public TestCasesGenerator(int t, int n, int nOfTrees){
 		problem = "" + t + " " + n + " "  + nOfTrees + "\n";

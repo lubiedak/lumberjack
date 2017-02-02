@@ -5,14 +5,14 @@ import java.util.Arrays;
 
 public class Problem {
 
-	int[][] net;
-	int[][] profitabilityNet;
-	int[][] distancesBetweenTrees;
-	int[][] profitabilityNetByCutCost;
+	private int[][] net;
+	private int[][] profitabilityNet;
+	private int[][] distancesBetweenTrees;
+	private int[][] profitabilityNetByCutCost;
 
-	ArrayList<Tree> trees;
+	private ArrayList<Tree> trees;
 
-	LumberJack lumberjack;
+	private LumberJack lumberjack;
 
 	public Problem(int startTime, int netSize, int nOfTrees) {
 		super();
