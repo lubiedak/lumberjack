@@ -83,7 +83,7 @@ public class Problem {
 		}
 		return closestTree;
 	}
-	
+	/*
 	private Tree findClosestTree2() {
 		int x = lumberjack.getX();
 		int y = lumberjack.getY();
@@ -123,7 +123,7 @@ public class Problem {
 			profitabilityNetByCutCost[tree.getY()][tree.getX()] = (tree.getTreeValue()) / tree.getTimeNeededToCut();
 		}
 	}
-
+*/
 	private void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree() {
 		// TODO - could be separated into smaller chunks
 		for (Tree tree : trees) {
@@ -158,16 +158,15 @@ public class Problem {
 	private void countIfCanFallATree() {
 		for (Tree i : trees) {
 			for (Tree j : trees) {
-				if (!i.equals(j)) {
-					if (checkIfICanFallOnJ(i, j))
-						i.addTreeAbleToFall(j);
+				if (!i.equals(j) && checkIfICanFallOnJ(i, j)) {
+					i.addTreeAbleToFall(j);
 				}
 			}
 		}
 	}
 
 	private boolean checkIfICanFallOnJ(Tree i, Tree j) {
-		return areNeighbors(i, j) && i.IsInLineAndRangeAndHeavier(j) != Direction.NOT_IN_LINE;
+		return areNeighbors(i, j) && i.isInLineAndRangeAndHeavier(j) != Direction.NOT_IN_LINE;
 	}
 
 	private boolean areNeighbors(Tree a, Tree b) {

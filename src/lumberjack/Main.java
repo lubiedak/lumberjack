@@ -11,7 +11,7 @@ public class Main {
 		// TODO Auto-generated method stub
 
 		InputReader ir = new InputReader();
-		Problem p = ir.ReadProblemFromInputStream(System.in);
+		Problem p = ir.readProblemFromInputStream(System.in);
 		p.analyze();
 		List<String> decisions = p.solve();
 		for(String dec : decisions){

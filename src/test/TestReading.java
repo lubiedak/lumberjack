@@ -23,7 +23,7 @@ public class TestReading {
 						+"4 3 5 5 2 6\n";
 
 		InputReader ir = new InputReader();
-		Problem p = ir.ReadProblemFromString(input);
+		Problem p = ir.readProblemFromString(input);
 		p.analyze();
 		p.solve();
 		System.out.println(p);
@@ -41,7 +41,7 @@ public class TestReading {
 				+"1 2 1 1 1 1\n";
 		
 		InputReader ir = new InputReader();
-		Problem p = ir.ReadProblemFromString(input);
+		Problem p = ir.readProblemFromString(input);
 		p.analyze();
 				
 		p.solve();
@@ -61,7 +61,7 @@ public class TestReading {
 		String input = generator.getProblem();
 		
 		InputReader ir = new InputReader();
-		Problem p = ir.ReadProblemFromString(input);
+		Problem p = ir.readProblemFromString(input);
 		p.analyze();
 				
 		p.solve();
@@ -76,7 +76,7 @@ public class TestReading {
         String input = new String(java.nio.file.Files.readAllBytes(resPath), "UTF8"); 
 		
         InputReader ir = new InputReader();
-		Problem p = ir.ReadProblemFromString(input);
+		Problem p = ir.readProblemFromString(input);
 		p.analyze();
 				
 		p.solve();

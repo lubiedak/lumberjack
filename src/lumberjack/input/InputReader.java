@@ -15,12 +15,12 @@ public class InputReader {
 	private Problem problem;
 
 	
-	public Problem ReadProblemFromString(String input){
+	public Problem readProblemFromString(String input){
 		InputStream stream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
-		return ReadProblemFromInputStream(stream);
+		return readProblemFromInputStream(stream);
 	}
 
-	public Problem ReadProblemFromInputStream(InputStream stream) {
+	public Problem readProblemFromInputStream(InputStream stream) {
 		Scanner s = new Scanner(stream);
 		int time = s.nextInt();
 		int netSize = s.nextInt();
@@ -36,14 +36,14 @@ public class InputReader {
 		}
 		
 		
-		problem = ReadProblemFromInput(input);
+		problem = readProblemFromInput(input);
 		s.close();
 		return problem;
 	}
 	
 	
 
-	private Problem ReadProblemFromInput(List<String> input) {
+	private Problem readProblemFromInput(List<String> input) {
 		for (int i = 0; i < input.size(); i++) {
 			String nextLine = input.get(i);
 			Scanner scanner = new Scanner(nextLine);

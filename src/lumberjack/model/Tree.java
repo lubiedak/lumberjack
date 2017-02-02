@@ -96,7 +96,7 @@ public class Tree {
 		maxProfit = profit;
 	}
 
-	public Direction IsInLineAndRangeAndHeavier(Tree tree) {
+	public Direction isInLineAndRangeAndHeavier(Tree tree) {
 		if (x == tree.getX()) {
 			int distance = y - tree.getY();
 			if (Math.abs(distance) <= heightH && getTreeWeight() > tree.getTreeWeight())
