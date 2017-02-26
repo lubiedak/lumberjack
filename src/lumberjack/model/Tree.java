@@ -18,9 +18,6 @@ public class Tree {
 	private Direction bestDirectionToFall;
 	private int maxProfit;
 
-	
-	
-	
 	public Tree(int id, int heightH, int thicknessD, int weightC, int valueP, int x, int y) {
 		super();
 		this.id = id;
@@ -44,54 +41,61 @@ public class Tree {
 		this.y = -1;
 		this.cut = false; // up, right, down, left
 	}
-	
-	public static class Builder{
-		private final int id;
-		
-		
+
+	public static class Builder {
+		private int id;
+
 		private int x = 0;
 		private int y = 0;
-		
+
 		private int heightH = 0;
 		private int thicknessD = 0;
 		private int unitWeightC = 0;
 		private int unitValueP = 0;
-		
-		public Builder(int id){
-			this.id = id;
+
+		public Builder id(int val) {
+			id = val;
+			return this;
 		}
-		
-		public Builder x(int val){
-			x = val; return this;
+
+		public Builder x(int val) {
+			x = val;
+			return this;
 		}
-		
-		public Builder y(int val){
-			y = val; return this;
+
+		public Builder y(int val) {
+			y = val;
+			return this;
 		}
-		
-		public Builder height(int val){
-			heightH = val; return this;
+
+		public Builder height(int val) {
+			heightH = val;
+			return this;
 		}
-		
-		public Builder thickness(int val){
-			thicknessD = val; return this;
+
+		public Builder thickness(int val) {
+			thicknessD = val;
+			return this;
 		}
-		
-		public Builder unitWeight(int val){
-			unitWeightC = val; return this;
+
+		public Builder unitWeight(int val) {
+			unitWeightC = val;
+			return this;
 		}
-		public Builder unitValue(int val){
-			unitValueP = val; return this;
+
+		public Builder unitValue(int val) {
+			unitValueP = val;
+			return this;
 		}
-		
-		public Tree build(){
+
+		public Tree build() {
 			return new Tree(this);
 		}
-		
 
 	}
 
-	private Tree(Builder b){
+	private Tree(Builder b) {
+		id = b.id;
 		x = b.x;
 		y = b.y;
 		heightH = b.heightH;
@@ -99,13 +103,13 @@ public class Tree {
 		unitWeightC = b.unitWeightC;
 		unitValueP = b.unitValueP;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Tree [id=" + id + ", heightH=" + heightH + ", thicknessD=" + thicknessD + ", unitWeightC=" + unitWeightC
 				+ ", unitValueP=" + unitValueP + ", x=" + x + ", y=" + y + ", cut=" + cut + ", bestDirectionToFall="
-				+ bestDirectionToFall + ", maxProfit=" + maxProfit + ", Value=" + getTreeValue() + ", NeighborsInRange = "
-				+ Arrays.toString(treesAbleToFall) + "]";
+				+ bestDirectionToFall + ", maxProfit=" + maxProfit + ", Value=" + getTreeValue()
+				+ ", NeighborsInRange = " + Arrays.toString(treesAbleToFall) + "]";
 
 	}
 
@@ -157,8 +161,8 @@ public class Tree {
 	public boolean isCut() {
 		return cut;
 	}
-	
-	public int getIdOfNeighbourInThisDirection(Direction dir){
+
+	public int getIdOfNeighbourInThisDirection(Direction dir) {
 		return treesAbleToFall[dir.ordinal()];
 	}
 
@@ -181,13 +185,13 @@ public class Tree {
 
 	public Direction IsInLineAndRangeAndHeavier(Tree tree) {
 		Direction dir = isInLine(tree);
-		if(getTreeWeight() > tree.getTreeWeight()){
+		if (getTreeWeight() > tree.getTreeWeight()) {
 			return dir;
 		}
 		return Direction.NOT_IN_LINE;
 	}
 
-	public Direction isInLine(Tree tree){
+	public Direction isInLine(Tree tree) {
 		if (x == tree.getX()) {
 			int distance = y - tree.getY();
 			if (Math.abs(distance) <= heightH)
@@ -200,11 +204,9 @@ public class Tree {
 		}
 		return Direction.NOT_IN_LINE;
 	}
-	
+
 	public int[] getTreesAbleToFall() {
 		return treesAbleToFall;
 	}
-	
-	
 
 }

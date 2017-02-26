@@ -42,15 +42,17 @@ public class Problem {
 
 	public ArrayList<String> solve() {
 		while (lumberjack.getTimeToWalk() > 0) {
-			Tree t = findClosestTree();
-			//Tree t = findClosestTree2();
+			Tree t = findClosestTree2();
+			if (t.getId() == -1)
+				t = findClosestTree();
+
 			if (t.getId() != -1) {
 				lumberjack.goToTree(t);
 				Direction dir = t.getBestDirectionToFall();
 				boolean treeCut = lumberjack.cutTree(dir, t);
+				
 				if (dir != Direction.NOT_IN_LINE && treeCut)
 					runDominoEffect(t);
-				countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree();
 			}else{
 				lumberjack.finishTrip();
 			}
@@ -61,6 +63,7 @@ public class Problem {
 	private void runDominoEffect(Tree tree) {
 		Direction dir = tree.getBestDirectionToFall();
 		int id = tree.getIdOfNeighbourInThisDirection(dir);
+		
 		while (id != -1) {
 			Tree t = trees.get(id);
 			t.cutTree();
@@ -91,43 +94,24 @@ public class Problem {
 		int minValuePerCost = 0;
 		Tree closestTree = new Tree();
 		for (Tree tree : trees) {
+			if(!tree.isCut()){
 			int cost = Math.abs(x - tree.getX()) + Math.abs(y - tree.getY()) + tree.getThicknessD();
-			if (cost < lumberjack.getTimeToWalk()) {
+			if (cost <= lumberjack.getTimeToWalk()) {
 				int valuePerCost = tree.getMaxProfit() / cost;
-				if (valuePerCost > minValuePerCost && !tree.isCut()) {
+				if (valuePerCost > minValuePerCost) {
 					closestTree = tree;
 					minValuePerCost = valuePerCost;
 				}
+			}
 			}
 		}
 		return closestTree;
 	}
 
-	private void countProfitability() {
-		for (Tree tree : trees) {
-			profitabilityNet[tree.getY()][tree.getX()] = tree.getTreeValue();
-		}
-	}
-
-	private void countDistances() {
-		for (int i = 0; i < trees.size(); ++i) {
-			for (int j = 0; j < trees.size(); ++j) {
-				distancesBetweenTrees[i][j] = Math.abs(trees.get(i).getX() - trees.get(j).getX())
-						+ Math.abs(trees.get(i).getY() - trees.get(j).getY());
-			}
-		}
-	}
-
-	private void countProfitabilityDividedByCutCost() {
-		for (Tree tree : trees) {
-			profitabilityNetByCutCost[tree.getY()][tree.getX()] = (tree.getTreeValue()) / tree.getTimeNeededToCut();
-		}
-	}
 
 	private void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree() {
 		// TODO - could be separated into smaller chunks
 		for (Tree tree : trees) {
-			if(!tree.isCut()){
 			int[] maxProfit = new int[4];
 			Arrays.fill(maxProfit, tree.getTreeValue());
 
@@ -152,7 +136,8 @@ public class Problem {
 				}
 			}
 			tree.setDirectionAndProfit(Direction.values()[direction], biggestProfit);
-		}}
+		}
+
 	}
 
 	private void countIfCanFallATree() {
@@ -255,6 +240,28 @@ public class Problem {
 		distancesBetweenTrees = new int[nOfTrees][];
 		for (int i = 0; i < nOfTrees; ++i) {
 			distancesBetweenTrees[i] = new int[nOfTrees];
+		}
+	}
+	
+
+	private void countProfitability() {
+		for (Tree tree : trees) {
+			profitabilityNet[tree.getY()][tree.getX()] = tree.getTreeValue();
+		}
+	}
+
+	private void countDistances() {
+		for (int i = 0; i < trees.size(); ++i) {
+			for (int j = 0; j < trees.size(); ++j) {
+				distancesBetweenTrees[i][j] = Math.abs(trees.get(i).getX() - trees.get(j).getX())
+						+ Math.abs(trees.get(i).getY() - trees.get(j).getY());
+			}
+		}
+	}
+
+	private void countProfitabilityDividedByCutCost() {
+		for (Tree tree : trees) {
+			profitabilityNetByCutCost[tree.getY()][tree.getX()] = (tree.getTreeValue()) / tree.getTimeNeededToCut();
 		}
 	}
 
