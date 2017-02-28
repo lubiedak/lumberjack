@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class LumberJack {
 
-	int x; // position
-	int y; // position
-	ArrayList<String> decisions;
-	ArrayList<Integer> decisionsCost;
-	ArrayList<String> additionalInfo;
-	int timeToWalk;
+	private int x; // position
+	private int y; // position
+	private ArrayList<String> decisions;
+	private ArrayList<Integer> decisionsCost;
+	private ArrayList<String> additionalInfo;
+	private int timeToWalk;
 
 	public LumberJack(int time) {
 		x = 0;

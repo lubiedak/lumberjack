@@ -5,14 +5,14 @@ import java.util.Arrays;
 
 public class Problem {
 
-	int[][] net;
-	int[][] profitabilityNet;
-	int[][] distancesBetweenTrees;
-	int[][] profitabilityNetByCutCost;
+	private int[][] net;
+	private int[][] profitabilityNet;
+	private int[][] distancesBetweenTrees;
+	private int[][] profitabilityNetByCutCost;
 
-	ArrayList<Tree> trees;
+	private ArrayList<Tree> trees;
 
-	LumberJack lumberjack;
+	private LumberJack lumberjack;
 
 	public Problem(int startTime, int netSize, int nOfTrees) {
 		super();
@@ -107,8 +107,13 @@ public class Problem {
 		}
 		return closestTree;
 	}
-
-
+	
+	private void countProfitabilityDividedByCutCost() {
+		for (Tree tree : trees) {
+			profitabilityNetByCutCost[tree.getY()][tree.getX()] = (tree.getTreeValue()) / tree.getTimeNeededToCut();
+		}
+	}
+	
 	private void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree() {
 		// TODO - could be separated into smaller chunks
 		for (Tree tree : trees) {
@@ -143,9 +148,8 @@ public class Problem {
 	private void countIfCanFallATree() {
 		for (Tree i : trees) {
 			for (Tree j : trees) {
-				if (!i.equals(j)) {
-					if (checkIfICanFallOnJ(i, j))
-						i.addTreeAbleToFall(j);
+				if (!i.equals(j) && checkIfICanFallOnJ(i, j)) {
+					i.addTreeAbleToFall(j);
 				}
 			}
 		}
@@ -256,12 +260,6 @@ public class Problem {
 				distancesBetweenTrees[i][j] = Math.abs(trees.get(i).getX() - trees.get(j).getX())
 						+ Math.abs(trees.get(i).getY() - trees.get(j).getY());
 			}
-		}
-	}
-
-	private void countProfitabilityDividedByCutCost() {
-		for (Tree tree : trees) {
-			profitabilityNetByCutCost[tree.getY()][tree.getX()] = (tree.getTreeValue()) / tree.getTimeNeededToCut();
 		}
 	}
 

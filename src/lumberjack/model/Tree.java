@@ -153,9 +153,8 @@ public class Tree {
 		return y;
 	}
 
-	public int cutTree() {
+	public void cutTree() {
 		cut = true;
-		return getTreeValue();
 	}
 
 	public boolean isCut() {
@@ -202,6 +201,7 @@ public class Tree {
 			if (Math.abs(distance) <= heightH)
 				return (distance > 0) ? Direction.LEFT : Direction.RIGHT;
 		}
+
 		return Direction.NOT_IN_LINE;
 	}
 
