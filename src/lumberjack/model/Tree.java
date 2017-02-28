@@ -19,7 +19,6 @@ public class Tree {
 	private int maxProfit;
 
 	public Tree(int id, int heightH, int thicknessD, int weightC, int valueP, int x, int y) {
-		super();
 		this.id = id;
 		this.heightH = heightH;
 		this.thicknessD = thicknessD;
@@ -31,15 +30,7 @@ public class Tree {
 	}
 
 	public Tree() {
-		super();
-		this.id = -1;
-		this.heightH = -1;
-		this.thicknessD = -1;
-		this.unitWeightC = -1;
-		this.unitValueP = -1;
-		this.x = -1;
-		this.y = -1;
-		this.cut = false; // up, right, down, left
+		this(-1, -1, -1, -1, -1, -1, -1);
 	}
 
 	public static class Builder {
@@ -54,38 +45,31 @@ public class Tree {
 		private int unitValueP = 0;
 
 		public Builder id(int val) {
-			id = val;
-			return this;
+			id = val; return this;
 		}
 
 		public Builder x(int val) {
-			x = val;
-			return this;
+			x = val; return this;
 		}
 
 		public Builder y(int val) {
-			y = val;
-			return this;
+			y = val; return this;
 		}
 
 		public Builder height(int val) {
-			heightH = val;
-			return this;
+			heightH = val; return this;
 		}
 
 		public Builder thickness(int val) {
-			thicknessD = val;
-			return this;
+			thicknessD = val; return this;
 		}
 
 		public Builder unitWeight(int val) {
-			unitWeightC = val;
-			return this;
+			unitWeightC = val; return this;
 		}
 
 		public Builder unitValue(int val) {
-			unitValueP = val;
-			return this;
+			unitValueP = val; return this;
 		}
 
 		public Tree build() {
@@ -123,14 +107,6 @@ public class Tree {
 
 	public int getThicknessD() {
 		return thicknessD;
-	}
-
-	public int getUnitWeightC() {
-		return unitWeightC;
-	}
-
-	public int getUnitValueP() {
-		return unitValueP;
 	}
 
 	public int getTreeValue() {

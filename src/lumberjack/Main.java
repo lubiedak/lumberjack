@@ -3,7 +3,7 @@ package lumberjack;
 import java.util.List;
 
 import lumberjack.input.InputReader;
-import lumberjack.model.Problem;
+import lumberjack.problem.Problem;
 
 public class Main {
 

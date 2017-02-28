@@ -1,18 +1,24 @@
-package lumberjack.model;
+package lumberjack.problem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import lumberjack.model.Direction;
+import lumberjack.model.LumberJack;
+import lumberjack.model.Tree;
+
 public class Problem {
+	// public in package - this is my intention
+	int[][] net;
+	int[][] profitabilityNet;
+	int[][] distancesBetweenTrees;
+	int[][] profitabilityNetByCutCost;
 
-	private int[][] net;
-	private int[][] profitabilityNet;
-	private int[][] distancesBetweenTrees;
-	private int[][] profitabilityNetByCutCost;
-
-	private ArrayList<Tree> trees;
+	ArrayList<Tree> trees;
 
 	private LumberJack lumberjack;
+
+	private ProblemAnalyzer analyzer;
 
 	public Problem(int startTime, int netSize, int nOfTrees) {
 		super();
@@ -33,11 +39,8 @@ public class Problem {
 	}
 
 	public void analyze() {
-		//countDistances();
-		//countProfitability();
-		//countProfitabilityDividedByCutCost();
-		countIfCanFallATree();
-		countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree();
+		ProblemAnalyzer analyzer = new ProblemAnalyzer(this);
+		analyzer.analyze();
 	}
 
 	public ArrayList<String> solve() {
@@ -50,10 +53,10 @@ public class Problem {
 				lumberjack.goToTree(t);
 				Direction dir = t.getBestDirectionToFall();
 				boolean treeCut = lumberjack.cutTree(dir, t);
-				
+
 				if (dir != Direction.NOT_IN_LINE && treeCut)
 					runDominoEffect(t);
-			}else{
+			} else {
 				lumberjack.finishTrip();
 			}
 		}
@@ -63,7 +66,7 @@ public class Problem {
 	private void runDominoEffect(Tree tree) {
 		Direction dir = tree.getBestDirectionToFall();
 		int id = tree.getIdOfNeighbourInThisDirection(dir);
-		
+
 		while (id != -1) {
 			Tree t = trees.get(id);
 			t.cutTree();
@@ -86,7 +89,10 @@ public class Problem {
 		}
 		return closestTree;
 	}
-	
+
+	/*
+	 * Couldnt find better name for 2nd naive approach
+	 */
 	private Tree findClosestTree2() {
 		int x = lumberjack.getX();
 		int y = lumberjack.getY();
@@ -94,91 +100,18 @@ public class Problem {
 		int minValuePerCost = 0;
 		Tree closestTree = new Tree();
 		for (Tree tree : trees) {
-			if(!tree.isCut()){
-			int cost = Math.abs(x - tree.getX()) + Math.abs(y - tree.getY()) + tree.getThicknessD();
-			if (cost <= lumberjack.getTimeToWalk()) {
-				int valuePerCost = tree.getMaxProfit() / cost;
-				if (valuePerCost > minValuePerCost) {
-					closestTree = tree;
-					minValuePerCost = valuePerCost;
+			if (!tree.isCut()) {
+				int cost = Math.abs(x - tree.getX()) + Math.abs(y - tree.getY()) + tree.getThicknessD();
+				if (cost <= lumberjack.getTimeToWalk()) {
+					int valuePerCost = tree.getMaxProfit() / cost;
+					if (valuePerCost > minValuePerCost) {
+						closestTree = tree;
+						minValuePerCost = valuePerCost;
+					}
 				}
-			}
 			}
 		}
 		return closestTree;
-	}
-	
-	private void countProfitabilityDividedByCutCost() {
-		for (Tree tree : trees) {
-			profitabilityNetByCutCost[tree.getY()][tree.getX()] = (tree.getTreeValue()) / tree.getTimeNeededToCut();
-		}
-	}
-	
-	private void countOptimalProfitabilityWhenTreeIsCuttedAndFallsOnDifferentTree() {
-		// TODO - could be separated into smaller chunks
-		for (Tree tree : trees) {
-			int[] maxProfit = new int[4];
-			Arrays.fill(maxProfit, tree.getTreeValue());
-
-			int[] treesAbleToFall = tree.getTreesAbleToFall();
-
-			for (int i = 0; i < treesAbleToFall.length; ++i) {
-				int currentTreeId = treesAbleToFall[i];
-
-				while (currentTreeId >= 0) {
-					Tree currentTree = getTree(currentTreeId);
-					maxProfit[i] += getTree(currentTreeId).getTreeValue();
-					currentTreeId = currentTree.getTreesAbleToFall()[i];
-				}
-			}
-
-			int biggestProfit = tree.getTreeValue();
-			int direction = Direction.NOT_IN_LINE.ordinal();
-			for (int i = 0; i < maxProfit.length; ++i) {
-				if (maxProfit[i] > biggestProfit) {
-					direction = i;
-					biggestProfit = maxProfit[i];
-				}
-			}
-			tree.setDirectionAndProfit(Direction.values()[direction], biggestProfit);
-		}
-
-	}
-
-	private void countIfCanFallATree() {
-		for (Tree i : trees) {
-			for (Tree j : trees) {
-				if (!i.equals(j) && checkIfICanFallOnJ(i, j)) {
-					i.addTreeAbleToFall(j);
-				}
-			}
-		}
-	}
-
-	private boolean checkIfICanFallOnJ(Tree i, Tree j) {
-		return areNeighbors(i, j) && i.IsInLineAndRangeAndHeavier(j) != Direction.NOT_IN_LINE;
-	}
-
-	private boolean areNeighbors(Tree a, Tree b) {
-		Direction dir = a.isInLine(b);
-		if (dir != Direction.NOT_IN_LINE) {
-			int x = a.getX();
-			int y = a.getY();
-			x += dir.increaseX();
-			y += dir.increaseY();
-			for (int i = 0; i < distancesBetweenTrees[a.getId()][b.getId()] - 1; ++i) {
-
-				if (net[y][x] != -1)
-					return false;
-				x += dir.increaseX();
-				y += dir.increaseY();
-			}
-			if (net[y][x] == b.getId())
-				return true;
-		} else {
-			return false;
-		}
-		return false;
 	}
 
 	@Override
@@ -244,22 +177,6 @@ public class Problem {
 		distancesBetweenTrees = new int[nOfTrees][];
 		for (int i = 0; i < nOfTrees; ++i) {
 			distancesBetweenTrees[i] = new int[nOfTrees];
-		}
-	}
-	
-
-	private void countProfitability() {
-		for (Tree tree : trees) {
-			profitabilityNet[tree.getY()][tree.getX()] = tree.getTreeValue();
-		}
-	}
-
-	private void countDistances() {
-		for (int i = 0; i < trees.size(); ++i) {
-			for (int j = 0; j < trees.size(); ++j) {
-				distancesBetweenTrees[i][j] = Math.abs(trees.get(i).getX() - trees.get(j).getX())
-						+ Math.abs(trees.get(i).getY() - trees.get(j).getY());
-			}
 		}
 	}
 

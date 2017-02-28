@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import lumberjack.model.Problem;
 import lumberjack.model.Tree;
+import lumberjack.problem.Problem;
 
 public class InputReader {
 

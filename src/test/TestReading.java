@@ -8,11 +8,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import lumberjack.input.InputReader;
-import lumberjack.model.Problem;
+import lumberjack.problem.Problem;
 
 public class TestReading {
 
-	//@Test
+	@Test
 	public void test() {
 
 		String input = 	 "11 10 5\n"
@@ -30,7 +30,7 @@ public class TestReading {
 
 	}
 	
-	//@Test
+	@Test
 	public void testTreesInRangeLineAndHeavier() {
 	
 		String input = 	 "11 3 5\n"
@@ -68,7 +68,7 @@ public class TestReading {
 		System.out.println(p);
 	}
 	
-	//@Test
+	@Test
 	public void testLargerProblem() throws URISyntaxException, UnsupportedEncodingException, IOException {
 	
 		java.net.URL url = TestReading.class.getResource("largeForest.txt");
